@@ -41,7 +41,7 @@ public class CRUD {
             
             pmt.executeUpdate();
             pmt.close();
-            JOptionPane.showMessageDialog(null, "Dados enviado com sucesso.");
+            JOptionPane.showMessageDialog(null, "Dados enviado com sucesso..");
 
         } catch (SQLException ex) { // Se n funcionar recebe uma mensangem de erro dizendo que...
             JOptionPane.showMessageDialog(null, "Dados não enviado. Erro no: " + ex);
