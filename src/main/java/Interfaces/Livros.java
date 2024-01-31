@@ -49,7 +49,7 @@ public class Livros extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         TXTColuna = new javax.swing.JTextField();
         BtnCadastrar = new javax.swing.JToggleButton();
-        BtnClear = new javax.swing.JToggleButton();
+        BtnCancelar = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         TXTAno = new javax.swing.JTextField();
@@ -83,10 +83,10 @@ public class Livros extends javax.swing.JFrame {
             }
         });
 
-        BtnClear.setText("Clear");
-        BtnClear.addActionListener(new java.awt.event.ActionListener() {
+        BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnClearActionPerformed(evt);
+                BtnCancelarActionPerformed(evt);
             }
         });
 
@@ -138,7 +138,7 @@ public class Livros extends javax.swing.JFrame {
                         .addGap(181, 181, 181)
                         .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(BtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,7 +194,7 @@ public class Livros extends javax.swing.JFrame {
                         .addComponent(TXTLinha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65))
         );
@@ -223,20 +223,9 @@ public class Livros extends javax.swing.JFrame {
         System.out.println("Dado Inserido");
     }//GEN-LAST:event_BtnCadastrarActionPerformed
 
-    private void BtnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnClearActionPerformed
-       TXTTitulo.setText(null);
-        TXTGenero.setText(null);
-        TXTISBN.setText(null);
-        TXTEditora.setText(null);
-        TXTAutor.setText(null);
-        TXTPratileira.setText(null);
-        
-        TXTAno.setText(null);
-        TXTQuantidade.setText(null);
-        TXTn_p.setText(null);
-        TXTLinha.setText(null);
-        TXTColuna.setText(null);
-    }//GEN-LAST:event_BtnClearActionPerformed
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+       System.exit(0);
+    }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -275,7 +264,7 @@ public class Livros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnCadastrar;
-    private javax.swing.JToggleButton BtnClear;
+    private javax.swing.JToggleButton BtnCancelar;
     private javax.swing.JTextField TXTAno;
     private javax.swing.JTextField TXTAutor;
     private javax.swing.JTextField TXTColuna;
