@@ -5,8 +5,6 @@
 package com.mycompany.codigo;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author josev
@@ -86,22 +84,60 @@ public class Implementacao implements IMetodo {
 
     @Override
     public boolean Adicionar_usuario(String nome, String endereco, String email, int telefone) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sqlCode = "INSERT INTO usuarios (Nome, Email,Endereco,Telefone) VALUES (?,?,?,?)";
+        try { // Bloco responsavel por tentar enviar uma info na BD
+            pmt = connection.prepareStatement(sqlCode);
+
+            //(coluna, Dados_informacao)
+            pmt.setString(1, nome);
+            pmt.setString(2, email);
+            pmt.setString(3, endereco);
+            pmt.setInt(4, telefone);
+            
+            pmt.executeUpdate();
+            pmt.close();
+            return true;
+
+        } catch (SQLException ex) { // Se n funcionar recebe uma mensangem de erro dizendo que...
+            return false;
+        }
     }
 
     @Override
     public boolean Atualizar_usuario(int id, String nome, String endereco, String email, int telefone) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sqlCode = "update usuarios set Nome=" + nome + ", Email=" + email + ",Endereco="+ endereco + ",Telefone=" + telefone + "where UsuarioID=" + id;
+        try {
+            pmt = connection.prepareStatement(sqlCode);
+            pmt.executeUpdate();
+            return true;
+        }
+        catch(SQLException ex) {
+            return false;
+        }
     }
 
     @Override
     public int Retorna_id_usuario(String nome, String endereco, String email, int telefone) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sqlCode = "SELCT UsuarioID from lirvos where Nome=" + nome + " and Email=" + email + " and Endereco="+ endereco + " and Telefone=" + telefone;
+        try {
+            pmt = connection.prepareStatement(sqlCode);
+            return pmt.executeUpdate();
+        } catch (SQLException ex) {
+            return 0;
+        }
     }
 
     @Override
     public boolean Remover_usuario(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sqlCode = "delete from usuarios where UsuarioID=" + id;
+        try {
+            pmt = connection.prepareStatement(sqlCode);
+            pmt.executeUpdate();
+            return true;
+        }
+        catch(SQLException ex) {
+            return false;
+        }
     }
     
 }
