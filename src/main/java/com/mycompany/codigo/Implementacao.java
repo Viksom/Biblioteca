@@ -11,7 +11,7 @@ import java.sql.*;
  */
 public class Implementacao implements IMetodo {
     
-    static PreparedStatement pmtn = null;
+    static PreparedStatement pmt = null;
     static String sqlCode = null;
     static Statement smtnt = null;
     static Connection connection = ConexaoBD.conexao("biblioteca");
@@ -19,7 +19,7 @@ public class Implementacao implements IMetodo {
     @Override
     public boolean Adicionar_livro(String titulo, String genero, String isb, String editora, int ano, String autor, int quantidade, int numero_paginas,String nome_pratileira, int linha, int coluna) {
         try { // Bloco responsavel por tentar enviar uma info na BD
-            PreparedStatement pmt = connection.prepareStatement(sqlCode);
+            pmt = connection.prepareStatement(sqlCode);
 
             //(coluna, Dados_informacao)
             pmt.setString(1, titulo);
