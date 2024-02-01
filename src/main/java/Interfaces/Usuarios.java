@@ -5,6 +5,7 @@
 package Interfaces;
 
 import com.mycompany.codigo.CRUD;
+import com.mycompany.codigo.Implementacao;
 
 /**
  *
@@ -128,13 +129,21 @@ public class Usuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnCadastrarUsusarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarUsusarioActionPerformed
-       String nome, endereco, email;
-       int telefone;
+       String nome, endereco, email,telefone;
        nome = TXTNome.getText();
        endereco = TXTEndereco.getText();
        email=TXTEmail.getText();
-       telefone = Integer.parseInt(TXTTelefone.getText());
-       CRUD.InserirdadosUsuario(nome, endereco, email, telefone);
+       telefone = TXTTelefone.getText();
+       //CRUD.InserirdadosUsuario(nome, endereco, email, telefone);
+       
+       Implementacao add = new Implementacao();
+       boolean Usuario_cadastrado = add.Adicionar_usuario(nome, endereco, email, telefone);
+       
+       if(Usuario_cadastrado){
+           System.out.println("Usuario Cadastrado");
+       }else{
+           System.out.println("Não cadastrodo");
+       }
        
        TXTNome.setText(null);
        TXTEndereco.setText(null);
