@@ -5,7 +5,7 @@
 package Interfaces;
 
 import com.mycompany.codigo.CRUD;
-
+import com.mycompany.codigo.Implementacao;
 /**
  *
  * @author jeova
@@ -219,7 +219,14 @@ public class Livros extends javax.swing.JFrame {
         linha = Integer.parseInt(TXTLinha.getText());
         coluna = Integer.parseInt(TXTColuna.getText());
         
-        CRUD.InserirdadosLivro(titulo, genero, isbn, editora, ano, autor, quantidade, numero_paginas, nome_pratleira, linha, coluna);       
+        Implementacao add = new Implementacao();
+        boolean data = add.Adicionar_livro(titulo, genero, isbn, editora, ano, autor, quantidade, numero_paginas, nome_pratleira, linha, coluna);
+        
+        if(data){
+            System.out.println("Dado enviado com sucesso!");
+        }
+        else{System.out.println("Dado não enviado.");}
+        //CRUD.InserirdadosLivro(titulo, genero, isbn, editora, ano, autor, quantidade, numero_paginas, nome_pratleira, linha, coluna);       
         TXTTitulo.setText(null);
         TXTEditora.setText(null);
         TXTISBN.setText(null);
