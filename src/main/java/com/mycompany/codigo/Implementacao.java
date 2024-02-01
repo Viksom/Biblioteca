@@ -59,10 +59,24 @@ public class Implementacao implements IMetodo {
 
     @Override
     public int Retorna_id_livro(String titulo, String genero, String isb, String editora, int ano, String autor, int quantidade, int numero_paginas, String nome_pratileira, int linha, int coluna) {
-        sqlCode = "SELCT LivroID from lirvos where Titulo=" + titulo + " and Genero=" + genero + " and ISBN=" + isb + " and Editora=" + editora + " and Autor=" + autor + " and AnoPublicacao=" + ano + " and QuantidadeDisponivel=" + quantidade + " and Numero_paginas=" + numero_paginas + " and Nome_prateleira=" + nome_pratileira + " and linha=" + linha + " and coluna=" + coluna;
+        sqlCode = "SELCT LivroID from lirvos where Titulo = ? and Gener = ? and ISBN = ? and Editora = ? and Autor = ? and AnoPublicacao = ? and QuantidadeDisponivel = ? and Numero_paginas = ? and Nome_prateleira = ? and linha = ? and coluna = ?";
         try {
             pmt = connection.prepareStatement(sqlCode);
-            return pmt.executeUpdate();
+            
+            pmt.setString(1, titulo);
+            pmt.setString(2, genero);
+            pmt.setString(3, isb);
+            pmt.setString(4, editora);
+            pmt.setString(5, autor);
+            pmt.setInt(6,ano);
+            pmt.setInt(7,quantidade);
+            pmt.setInt(8,numero_paginas);
+            pmt.setString(9,nome_pratileira);
+            pmt.setInt(10, linha);
+            pmt.setInt(11, coluna);
+            
+            ResultSet rs = pmt.executeQuery();
+            return rs.getInt("LivroID");
         } catch (SQLException ex) {
             return 0;
         }
@@ -83,7 +97,7 @@ public class Implementacao implements IMetodo {
     }
 
     @Override
-    public boolean Adicionar_usuario(String nome, String endereco, String email, int telefone) {
+    public boolean Adicionar_usuario(String nome, String endereco, String email, String telefone) {
         sqlCode = "INSERT INTO usuarios (Nome, Email,Endereco,Telefone) VALUES (?,?,?,?)";
         try { // Bloco responsavel por tentar enviar uma info na BD
             pmt = connection.prepareStatement(sqlCode);
@@ -92,7 +106,7 @@ public class Implementacao implements IMetodo {
             pmt.setString(1, nome);
             pmt.setString(2, email);
             pmt.setString(3, endereco);
-            pmt.setInt(4, telefone);
+            pmt.setString(4, telefone);
             
             pmt.executeUpdate();
             pmt.close();
@@ -104,7 +118,7 @@ public class Implementacao implements IMetodo {
     }
 
     @Override
-    public boolean Atualizar_usuario(int id, String nome, String endereco, String email, int telefone) {
+    public boolean Atualizar_usuario(int id, String nome, String endereco, String email, String telefone) {
         sqlCode = "update usuarios set Nome=" + nome + ", Email=" + email + ",Endereco="+ endereco + ",Telefone=" + telefone + "where UsuarioID=" + id;
         try {
             pmt = connection.prepareStatement(sqlCode);

@@ -14,8 +14,8 @@ public interface IMetodo {
     int Retorna_id_livro(String titulo, String genero, String isb, String editora, int ano, String autor, int quantidade, int numero_paginas,String nome_pratileira, int linha, int coluna);
     boolean Atualizar_livro(int id, String titulo, String genero, String isb, String editora, int ano, String autor, int quantidade, int numero_paginas,String nome_pratileira, int linha, int coluna);
     
-    boolean Adicionar_usuario(String nome, String endereco, String email, int telefone);
-    boolean Atualizar_usuario(int id, String nome, String endereco, String email, int telefone);
+    boolean Adicionar_usuario(String nome, String endereco, String email, String telefone);
+    boolean Atualizar_usuario(int id, String nome, String endereco, String email, String telefone);
     int Retorna_id_usuario(String nome, String endereco, String email, int telefone);
     boolean Remover_usuario(int id);
 }
