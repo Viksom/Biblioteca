@@ -49,7 +49,7 @@ public class Livros extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         TXTColuna = new javax.swing.JTextField();
         BtnCadastrar = new javax.swing.JToggleButton();
-        BtnClear = new javax.swing.JToggleButton();
+        BtnCancelar = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         TXTAno = new javax.swing.JTextField();
@@ -83,8 +83,15 @@ public class Livros extends javax.swing.JFrame {
             }
         });
 
-        BtnClear.setText("Clear");
+        BtnCancelar.setText("Cancelar");
+        BtnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCancelarActionPerformed(evt);
+            }
+        });
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(51, 0, 255));
         jLabel11.setText("Cadastrando Livros");
 
         jLabel12.setText("Ano de publicacao");
@@ -131,7 +138,7 @@ public class Livros extends javax.swing.JFrame {
                         .addGap(170, 170, 170)
                         .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(47, 47, 47)
-                        .addComponent(BtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,10 +192,10 @@ public class Livros extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TXTLinha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19))
         );
 
@@ -212,9 +219,24 @@ public class Livros extends javax.swing.JFrame {
         linha = Integer.parseInt(TXTLinha.getText());
         coluna = Integer.parseInt(TXTColuna.getText());
         
-        CRUD.InserirdadosLivro(titulo, genero, isbn, editora, ano, autor, quantidade, numero_paginas, nome_pratleira, linha, coluna);
-        System.out.println("Dado Inserido");
+        CRUD.InserirdadosLivro(titulo, genero, isbn, editora, ano, autor, quantidade, numero_paginas, nome_pratleira, linha, coluna);       
+        TXTTitulo.setText(null);
+        TXTEditora.setText(null);
+        TXTISBN.setText(null);
+        TXTGenero.setText(null);
+        TXTAutor.setText(null);
+        TXTPratileira.setText(null);
+        TXTAno.setText(null);
+        TXTQuantidade.setText(null);
+        TXTn_p.setText(null);
+        TXTLinha.setText(null);
+        TXTColuna.setText(null);
+        
     }//GEN-LAST:event_BtnCadastrarActionPerformed
+
+    private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,7 +275,7 @@ public class Livros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnCadastrar;
-    private javax.swing.JToggleButton BtnClear;
+    private javax.swing.JToggleButton BtnCancelar;
     private javax.swing.JTextField TXTAno;
     private javax.swing.JTextField TXTAutor;
     private javax.swing.JTextField TXTColuna;

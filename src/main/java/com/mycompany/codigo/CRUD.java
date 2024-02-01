@@ -71,6 +71,48 @@ public class CRUD {
         }
         
     } // End dado usuario
-    
+
+     
+      // Dados do Emprestimo
+     public static void InserirdadosEmprestimo(String DataEmprestimo, String DataDevolucao) {
+        sqlCode = "INSERT INTO transacoes_emprestimo (DataEmprestimo,DataDevolucao) VALUES (?,?)";
+
+        try { // Bloco responsavel por tentar enviar uma info na BD
+            PreparedStatement pmt = connection.prepareStatement(sqlCode);
+
+            //(coluna, Dados_informacao)
+            pmt.setString(1,DataEmprestimo);
+            pmt.setString(2, DataDevolucao);
+            
+            pmt.executeUpdate();
+            pmt.close();
+            JOptionPane.showMessageDialog(null, "Dados enviado com sucesso.");
+
+        } catch (SQLException ex) { // Se n funcionar recebe uma mensangem de erro dizendo que...
+            JOptionPane.showMessageDialog(null, "Dados não enviado. Erro no: " + ex);
+        }
+        
+    } // End dado Emprestimos
+     
+     public static void InserirdadosMulta(int valor, String pago, String data_vencimento) {
+        sqlCode = "INSERT INTO multas (Valor,Pago,DataVencimento) VALUES (?,?,?)";
+
+        try { // Bloco responsavel por tentar enviar uma info na BD
+            PreparedStatement pmt = connection.prepareStatement(sqlCode);
+
+            //(coluna, Dados_informacao)
+            pmt.setInt(1,valor);
+            pmt.setString(2, pago);
+            pmt.setString(3,data_vencimento);
+            
+            pmt.executeUpdate();
+            pmt.close();
+            JOptionPane.showMessageDialog(null, "Dados enviado com sucesso.");
+
+        } catch (SQLException ex) { // Se n funcionar recebe uma mensangem de erro dizendo que...
+            JOptionPane.showMessageDialog(null, "Dados não enviado. Erro no: " + ex);
+        }
+        
+    } // End dado Emprestimos
      
 }
