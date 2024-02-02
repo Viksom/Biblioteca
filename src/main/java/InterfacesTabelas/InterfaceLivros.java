@@ -153,8 +153,8 @@ public class InterfaceLivros extends javax.swing.JFrame {
         String Genero = (String) jTable1.getValueAt(selected, 1);
         String ISBN = (String) jTable1.getValueAt(selected, 2);
         String Editora = (String) jTable1.getValueAt(selected, 3);
-        String Ano = (String) jTable1.getValueAt(selected, 5);
         String Autor = (String) jTable1.getValueAt(selected, 4);
+        String Ano = (String) jTable1.getValueAt(selected, 5);        
         String Quant = (String) jTable1.getValueAt(selected, 6);
         String Num_page = (String) jTable1.getValueAt(selected, 7);
         String Prat = (String) jTable1.getValueAt(selected, 8);
@@ -225,7 +225,7 @@ public class InterfaceLivros extends javax.swing.JFrame {
             String[] linha = {IDSelect.getString("Titulo"),
             IDSelect.getString("Genero"), IDSelect.getString("ISBN"),
             IDSelect.getString("Editora"), IDSelect.getString("Autor"),
-            Integer.toString(IDSelect.getInt("AnoPublicacao")), Integer.toString(IDSelect.getInt("Numero_paginas")), Integer.toString(IDSelect.getInt("QuantidadeDisponivel")),
+            Integer.toString(IDSelect.getInt("AnoPublicacao")), Integer.toString(IDSelect.getInt("QuantidadeDisponivel")), Integer.toString(IDSelect.getInt("Numero_paginas")),
             IDSelect.getString("Nome_Prateleira"), Integer.toString(IDSelect.getInt("linha")),
             Integer.toString(IDSelect.getInt("coluna"))};
             modelo.addRow(linha);

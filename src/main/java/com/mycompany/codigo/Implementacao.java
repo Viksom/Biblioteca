@@ -74,9 +74,13 @@ public class Implementacao implements IMetodo {
             pmt.setString(9,nome_pratileira);
             pmt.setInt(10, linha);
             pmt.setInt(11, coluna);
-            ResultSet rs = pmt.executeQuery();
+            //System.out.println("Gen " + genero+ " Tit " + titulo + " Edit " + editora + " Act " + autor + "Quant" + quantidade +" Pages " + numero_paginas + " Prat" + nome_pratileira + " Line " + linha + " Column " + coluna);
+            System.out.println(quantidade);
+            System.out.println(numero_paginas);
+            System.out.println(pmt);
+            rs = pmt.executeQuery();
             rs.next();
-            return rs.getRow();
+            return rs.getInt("LivroID");
         } catch (SQLException ex) {
             return 0;
         }
@@ -139,7 +143,7 @@ public class Implementacao implements IMetodo {
             pmt.setString(2, email);
             pmt.setString(3, endereco);
             pmt.setString(4, telefone);
-            ResultSet rs = pmt.executeQuery();
+            rs = pmt.executeQuery();
             rs.next();
             return rs.getInt("UsuarioID");
         } catch (SQLException ex) {
