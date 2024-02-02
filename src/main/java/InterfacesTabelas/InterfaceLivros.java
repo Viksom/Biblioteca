@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package InterfacesTabelas;
-
+import Interfaces.Livros;
 /**
  *
  * @author jeova
@@ -64,6 +64,11 @@ public class InterfaceLivros extends javax.swing.JFrame {
         BtnApagar.setText("Apagar");
 
         BtnCadastrar.setText("Cadastrar");
+        BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCadastrarActionPerformed(evt);
+            }
+        });
 
         btnPesquisar.setText("Pesquisar");
 
@@ -112,6 +117,11 @@ public class InterfaceLivros extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
+        Livros l = new Livros();
+        l.setVisible(true);
+    }//GEN-LAST:event_BtnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
