@@ -4,6 +4,11 @@
  */
 package InterfacesTabelas;
 import Interfaces.Livros;
+import com.mycompany.codigo.Implementacao;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author jeova
@@ -13,8 +18,17 @@ public class InterfaceLivros extends javax.swing.JFrame {
     /**
      * Creates new form InterfaceLivros
      */
-    public InterfaceLivros() {
+    
+    private static DefaultTableModel modelo;
+    public InterfaceLivros() throws SQLException {
         initComponents();
+        BtnApagar.setEnabled(false);
+        BtnAtualizar.setEnabled(false);
+        String[] colunas = {"Titulo", "Genero", "ISBN", "Editora", "Autor", "AnoPublicacao", "Quantidade Disponivel", "Numero_paginas", "Nome_Prateleira", "linha", "coluna"};
+        modelo = new DefaultTableModel(colunas, 0);
+        
+        jTable1.setModel(modelo);
+        Preencher_tabela("");
     }
 
     /**
@@ -38,23 +52,28 @@ public class InterfaceLivros extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Livro ID", "Titulo", "Genero", "ISBN", "Editora", "Autor", "Ano de Publicação", "Quantidade disponivel", "Numero de Paginas", "Nome Pratileira", "Linha", "Coluna"
+                "Titulo", "Genero", "ISBN", "Editora", "Autor", "Ano de Publicação", "Quantidade disponivel", "Numero de Paginas", "Nome Pratileira", "Linha", "Coluna"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable1MousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -62,6 +81,11 @@ public class InterfaceLivros extends javax.swing.JFrame {
         BtnAtualizar.setText("Atualizar");
 
         BtnApagar.setText("Apagar");
+        BtnApagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnApagarActionPerformed(evt);
+            }
+        });
 
         BtnCadastrar.setText("Cadastrar");
         BtnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,16 +141,48 @@ public class InterfaceLivros extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void BtnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCadastrarActionPerformed
         Livros l = new Livros();
         l.setVisible(true);
     }//GEN-LAST:event_BtnCadastrarActionPerformed
 
+    private void BtnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnApagarActionPerformed
+        int selected = jTable1.getSelectedRow();
+        String Titulo = (String) jTable1.getValueAt(selected, 0);
+        String Genero = (String) jTable1.getValueAt(selected, 1);
+        String ISBN = (String) jTable1.getValueAt(selected, 2);
+        String Editora = (String) jTable1.getValueAt(selected, 3);
+        String Ano = (String) jTable1.getValueAt(selected, 5);
+        String Autor = (String) jTable1.getValueAt(selected, 4);
+        String Quant = (String) jTable1.getValueAt(selected, 6);
+        String Num_page = (String) jTable1.getValueAt(selected, 7);
+        String Prat = (String) jTable1.getValueAt(selected, 8);
+        String Linha = (String) jTable1.getValueAt(selected, 9);
+        String Coluna = (String) jTable1.getValueAt(selected, 10);
+        int id = app.Retorna_id_livro(Titulo, Genero, ISBN, Editora, Integer.parseInt(Ano), Autor, Integer.parseInt(Quant), Integer.parseInt(Num_page), Prat, Integer.parseInt(Linha), Integer.parseInt(Coluna));
+        if (app.Remover_livro(id) && id != 0) {
+            System.out.println("Livro Removido");
+            try {
+                Preencher_tabela("");
+            } catch (SQLException ex) {
+                Logger.getLogger(InterfaceLivros.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            System.out.println("Livro nao encontrado!!!");
+        }
+    }//GEN-LAST:event_BtnApagarActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        BtnApagar.setEnabled(true);
+        BtnAtualizar.setEnabled(true);
+    }//GEN-LAST:event_jTable1MousePressed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws SQLException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -149,14 +205,41 @@ public class InterfaceLivros extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(InterfaceLivros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfaceLivros().setVisible(true);
+                try {
+                    new InterfaceLivros().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(InterfaceLivros.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
+    
+    public static void Preencher_tabela(String word) throws SQLException {
+        Limpar_tabela();
+        ResultSet IDSelect = app.Listar_livros(word);
+        while(IDSelect.next()) {
+            String[] linha = {IDSelect.getString("Titulo"),
+            IDSelect.getString("Genero"), IDSelect.getString("ISBN"),
+            IDSelect.getString("Editora"), IDSelect.getString("Autor"),
+            Integer.toString(IDSelect.getInt("AnoPublicacao")), Integer.toString(IDSelect.getInt("Numero_paginas")), Integer.toString(IDSelect.getInt("QuantidadeDisponivel")),
+            IDSelect.getString("Nome_Prateleira"), Integer.toString(IDSelect.getInt("linha")),
+            Integer.toString(IDSelect.getInt("coluna"))};
+            modelo.addRow(linha);
+        }
+    }
+    
+    private static void Limpar_tabela() {
+        int n = modelo.getRowCount();
+        for(int i=n-1; i>=0;i--) {
+            modelo.removeRow(i);
+        }
+    }
+    
+    public static Implementacao app = new Implementacao();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton BtnApagar;

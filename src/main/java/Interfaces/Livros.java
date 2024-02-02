@@ -242,7 +242,7 @@ public class Livros extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCadastrarActionPerformed
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
-        System.exit(0);
+        this.dispose();
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     /**
