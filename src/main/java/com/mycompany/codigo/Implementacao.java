@@ -73,9 +73,7 @@ public class Implementacao implements IMetodo {
             pmt.setString(9,nome_pratileira);
             pmt.setInt(10, linha);
             pmt.setInt(11, coluna);
-            System.out.println("Pri");
             ResultSet rs = pmt.executeQuery();
-            System.out.println("Pri");
             rs.next();
             return rs.getRow();
         } catch (SQLException ex) {
@@ -141,6 +139,7 @@ public class Implementacao implements IMetodo {
             pmt.setString(3, endereco);
             pmt.setString(4, telefone);
             ResultSet rs = pmt.executeQuery();
+            rs.next();
             return rs.getInt("UsuarioID");
         } catch (SQLException ex) {
             return 0;
