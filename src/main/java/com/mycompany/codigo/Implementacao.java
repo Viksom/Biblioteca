@@ -162,13 +162,20 @@ public class Implementacao implements IMetodo {
 
     @Override
     public ResultSet Listar_livros(String word) {
-        sqlCode = "select Titulo, Genero, ISBN, Editora, Autor, AnoPublicacao, QuantidadeDisponivel, Numero_paginas, Nome_Prateleira, linha, coluna from livros where Titulo like ?% or Autor like ?% or Editora like ?%";
+        if("".equals(word)){
+            sqlCode = "select Titulo, Genero, ISBN, Editora, Autor, AnoPublicacao, QuantidadeDisponivel, Numero_paginas, Nome_Prateleira, linha, coluna from livros";
+        }
+        else{
+            sqlCode = "select Titulo, Genero, ISBN, Editora, Autor, AnoPublicacao, QuantidadeDisponivel, Numero_paginas, Nome_Prateleira, linha, coluna from livros where Titulo like '" +word+"%' or Autor like '" +word+"%' or Editora like '" +word+ "%'";
+        }
         try {
             pmt = connection.prepareStatement(sqlCode);
-            pmt.setString(1, word);
-            pmt.setString(2, word);
-            pmt.setString(3, word);
+            //pmt.setString(1, word);
+            //pmt.setString(2, word);
+            //pmt.setString(3, word);
+            System.out.println("Po");
             rs = pmt.executeQuery();
+            System.out.println("Po");
             return rs;
         } catch (SQLException ex) {
             return rs;
@@ -177,10 +184,15 @@ public class Implementacao implements IMetodo {
 
     @Override
     public ResultSet Listar_usuarios(String word) {
-        sqlCode = "select Nome, Email, Endereco, Telefone from usuarios where nome like ?%";
+        if("".equals(word)){
+            sqlCode = "select Nome, Email, Endereco, Telefone from usuarios";
+        }
+        else{
+            sqlCode = "select Nome, Email, Endereco, Telefone from usuarios where Nome like '" +word+ "%'";
+        }
         try {
             pmt = connection.prepareStatement(sqlCode);
-            pmt.setString(1, word);
+            //pmt.setString(1, word);
             rs = pmt.executeQuery();
             return rs;
         } catch (SQLException ex) {

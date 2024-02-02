@@ -10,10 +10,15 @@ import java.sql.*;
  */
 public class Codigo {
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         Implementacao teste = new Implementacao();
         System.out.println("Chegou!");
-        int pegaID = teste.Retorna_id_livro("vgsfb", "g5rtdfb", "bgfbd", "brfdgb", 2001, "htyeh", 23, 23, "hyeth", 23, 23);
-        System.out.println(pegaID);
+        ResultSet pegaID = teste.Listar_usuarios("");
+        while(pegaID.next()) {
+            System.out.println(pegaID.getString("Nome"));
+            System.out.println(pegaID.getString("Email"));
+            System.out.println(pegaID.getString("Endereco"));
+            System.out.println(pegaID.getString("Telefone"));
+        }
     }
 }
