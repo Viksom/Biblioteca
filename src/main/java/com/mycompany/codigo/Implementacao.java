@@ -14,6 +14,7 @@ public class Implementacao implements IMetodo {
     static PreparedStatement pmt = null;
     static String sqlCode = null;
     static Statement smtnt = null;
+    static ResultSet rs = null;
     static Connection connection = ConexaoBD.conexao("biblioteca");
 
     @Override
@@ -156,6 +157,34 @@ public class Implementacao implements IMetodo {
         }
         catch(SQLException ex) {
             return false;
+        }
+    }
+
+    @Override
+    public ResultSet Listar_livros(String word) {
+        sqlCode = "select Titulo, Genero, ISBN, Editora, Autor, AnoPublicacao, QuantidadeDisponivel, Numero_paginas, Nome_Prateleira, linha, coluna from livros where Titulo like ?% or Autor like ?% or Editora like ?%";
+        try {
+            pmt = connection.prepareStatement(sqlCode);
+            pmt.setString(1, word);
+            pmt.setString(2, word);
+            pmt.setString(3, word);
+            rs = pmt.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            return rs;
+        }
+    }
+
+    @Override
+    public ResultSet Listar_usuarios(String word) {
+        sqlCode = "select Nome, Email, Endereco, Telefone from usuarios where nome like ?%";
+        try {
+            pmt = connection.prepareStatement(sqlCode);
+            pmt.setString(1, word);
+            rs = pmt.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            return rs;
         }
     }
     
