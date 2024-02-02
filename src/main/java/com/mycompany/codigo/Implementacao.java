@@ -59,10 +59,9 @@ public class Implementacao implements IMetodo {
 
     @Override
     public int Retorna_id_livro(String titulo, String genero, String isb, String editora, int ano, String autor, int quantidade, int numero_paginas, String nome_pratileira, int linha, int coluna) {
-        sqlCode = "SELCT LivroID from lirvos where Titulo = ? and Gener = ? and ISBN = ? and Editora = ? and Autor = ? and AnoPublicacao = ? and QuantidadeDisponivel = ? and Numero_paginas = ? and Nome_prateleira = ? and linha = ? and coluna = ?";
+        sqlCode = "SELECT LivroID from livros where Titulo = ? and Genero = ? and ISBN = ? and Editora = ? and Autor = ? and AnoPublicacao = ? and QuantidadeDisponivel = ? and Numero_paginas = ? and Nome_Prateleira = ? and linha = ? and coluna = ?";
         try {
             pmt = connection.prepareStatement(sqlCode);
-            
             pmt.setString(1, titulo);
             pmt.setString(2, genero);
             pmt.setString(3, isb);
@@ -74,9 +73,11 @@ public class Implementacao implements IMetodo {
             pmt.setString(9,nome_pratileira);
             pmt.setInt(10, linha);
             pmt.setInt(11, coluna);
-            
+            System.out.println("Pri");
             ResultSet rs = pmt.executeQuery();
-            return rs.getInt("LivroID");
+            System.out.println("Pri");
+            rs.next();
+            return rs.getRow();
         } catch (SQLException ex) {
             return 0;
         }
@@ -131,11 +132,16 @@ public class Implementacao implements IMetodo {
     }
 
     @Override
-    public int Retorna_id_usuario(String nome, String endereco, String email, int telefone) {
-        sqlCode = "SELCT UsuarioID from lirvos where Nome=" + nome + " and Email=" + email + " and Endereco="+ endereco + " and Telefone=" + telefone;
+    public int Retorna_id_usuario(String nome, String endereco, String email, String telefone) {
+        sqlCode = "SELECT UsuarioID from usuarios where Nome = ? and Email = ? and Endereco = ? and Telefone = ?";
         try {
             pmt = connection.prepareStatement(sqlCode);
-            return pmt.executeUpdate();
+            pmt.setString(1, nome);
+            pmt.setString(2, email);
+            pmt.setString(3, endereco);
+            pmt.setString(4, telefone);
+            ResultSet rs = pmt.executeQuery();
+            return rs.getInt("UsuarioID");
         } catch (SQLException ex) {
             return 0;
         }

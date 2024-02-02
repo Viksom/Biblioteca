@@ -16,6 +16,6 @@ public interface IMetodo {
     
     boolean Adicionar_usuario(String nome, String endereco, String email, String telefone);
     boolean Atualizar_usuario(int id, String nome, String endereco, String email, String telefone);
-    int Retorna_id_usuario(String nome, String endereco, String email, int telefone);
+    int Retorna_id_usuario(String nome, String endereco, String email, String telefone);
     boolean Remover_usuario(int id);
 }
